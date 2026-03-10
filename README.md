@@ -2,7 +2,7 @@
 
 A custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the [Home Maintenance](https://github.com/TJPoorman/home_maintenance) integration. Displays all your recurring maintenance tasks in a beautiful grid with circular progress rings, color-coded urgency, and one-tap task completion.
 
-[![Open your Home Assistant instance and show the add repository dialog for this repository.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=etorhub&repository=home-maintenance-card&category=plugin)
+[![Open your Home Assistant instance and show the add repository dialog for this repository.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=etorhub&repository=home-maintenance-card&category=frontend)
 
 ---
 
@@ -58,8 +58,6 @@ This card requires the [Home Maintenance](https://github.com/TJPoorman/home_main
 3. Search for **Home Maintenance Card**.
 4. Click **Download**.
 5. Refresh your browser (or clear cache).
-
-**Or use the button above** — Click the "Open your Home Assistant instance" badge to add this repository as a custom HACS repository (replace `YOUR_GITHUB_USERNAME` in the badge URL with the actual GitHub owner).
 
 ### Manual
 

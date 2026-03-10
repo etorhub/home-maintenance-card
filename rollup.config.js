@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
+import { minify } from 'rollup-plugin-esbuild-minify';
 import json from '@rollup/plugin-json';
 
 export default {
@@ -16,7 +16,7 @@ export default {
     commonjs(),
     typescript(),
     json(),
-    terser(),
+    minify(),
   ],
   onwarn(warning, warn) {
     if (warning.code === 'THIS_IS_UNDEFINED' && warning.id?.includes('/node_modules/')) return;
