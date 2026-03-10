@@ -61,7 +61,7 @@ This card requires the [Home Maintenance](https://github.com/TJPoorman/home_main
 
 ### Manual
 
-1. Download `home-maintenance-card.js` from the [latest release](https://github.com/YOUR_GITHUB_USERNAME/home-maintenance-card/releases/latest).
+1. Download `home-maintenance-card.js` from the [latest release](https://github.com/etorhub/home-maintenance-card/releases/latest).
 2. Copy it to your `config/www/` folder.
 3. Add the resource in **Settings → Dashboards → Resources**:
    - **URL:** `/local/home-maintenance-card.js`
@@ -192,7 +192,7 @@ columns: 3
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_GITHUB_USERNAME/home-maintenance-card.git
+git clone https://github.com/etorhub/home-maintenance-card.git
 cd home-maintenance-card
 
 # Install dependencies
@@ -204,21 +204,21 @@ npx lefthook install
 
 ### Commands
 
-| Command                | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `npm start`            | Dev build with watch + local server on `:5000` |
-| `npm run build`        | Production build to `dist/`                    |
-| `npm run lint`         | Run ESLint                                     |
-| `npm run lint:fix`     | ESLint with auto-fix                           |
-| `npm run format`       | Prettier format                                |
-| `npm run format:check` | Prettier check                                 |
-| `npm run typecheck`    | TypeScript check                               |
-| `npm run test`         | Run Vitest tests                               |
-| `npm run test:watch`   | Vitest watch mode                              |
-| `npm run storybook`    | Start Storybook dev server on `:6006`           |
-| `npm run build-storybook` | Build static Storybook                      |
-| `npm run test-storybook`  | Run Storybook test-runner (requires build)  |
-| `npm run commit`       | Interactive commit wizard (Commitizen)         |
+| Command                   | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| `npm start`               | Dev build with watch + local server on `:5000` |
+| `npm run build`           | Production build to `dist/`                    |
+| `npm run lint`            | Run ESLint                                     |
+| `npm run lint:fix`        | ESLint with auto-fix                           |
+| `npm run format`          | Prettier format                                |
+| `npm run format:check`    | Prettier check                                 |
+| `npm run typecheck`       | TypeScript check                               |
+| `npm run test`            | Run Vitest tests                               |
+| `npm run test:watch`      | Vitest watch mode                              |
+| `npm run storybook`       | Start Storybook dev server on `:6006`          |
+| `npm run build-storybook` | Build static Storybook                         |
+| `npm run test-storybook`  | Run Storybook test-runner (requires build)     |
+| `npm run commit`          | Interactive commit wizard (Commitizen)         |
 
 ### Storybook (Development & Regression Testing)
 
