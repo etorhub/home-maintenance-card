@@ -177,7 +177,8 @@ export class HomeMaintenanceCardEditor extends LitElement implements LovelaceCar
     const target = ev.target as any;
     const key = target.configValue as string;
     if (!key) return;
-    const val = target.value;
+    // ha-select fires 'selected' with value in ev.detail; ha-textfield uses target.value
+    const val = (ev as CustomEvent<{ value?: string }>).detail?.value ?? target.value;
     if ((this._config as any)[key] === val) return;
     this._config = { ...this._config, [key]: val === '' ? undefined : val };
     fireEvent(this, 'config-changed', { config: this._config });

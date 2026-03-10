@@ -677,7 +677,7 @@ function m(s,e,t,r){var i=arguments.length,o=i<3?e:r===null?r=Object.getOwnPrope
           <div class="accordion__content">${r}</div>
         </div>
       </div>
-    `}_valueChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;if(!r)return;const i=t.value;this._config[r]!==i&&(this._config={...this._config,[r]:i===""?void 0:i},se(this,"config-changed",{config:this._config}))}_numChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;if(!r)return;const i=parseInt(t.value,10);isNaN(i)||(this._config={...this._config,[r]:i},se(this,"config-changed",{config:this._config}))}_boolChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;r&&(this._config={...this._config,[r]:t.checked},se(this,"config-changed",{config:this._config}))}static get styles(){return O`
+    `}_valueChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;if(!r)return;const i=e.detail?.value??t.value;this._config[r]!==i&&(this._config={...this._config,[r]:i===""?void 0:i},se(this,"config-changed",{config:this._config}))}_numChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;if(!r)return;const i=parseInt(t.value,10);isNaN(i)||(this._config={...this._config,[r]:i},se(this,"config-changed",{config:this._config}))}_boolChanged(e){if(!this._config)return;const t=e.target,r=t.configValue;r&&(this._config={...this._config,[r]:t.checked},se(this,"config-changed",{config:this._config}))}static get styles(){return O`
       ha-select,
       ha-textfield {
         margin-bottom: 16px;
