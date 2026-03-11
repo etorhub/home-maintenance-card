@@ -13,7 +13,7 @@ import './components/summary-header';
 import './components/progress-ring';
 
 console.info(
-  `%c HOME-MAINTENANCE-CARD \n%c ${localize('common.version')} ${CARD_VERSION} `,
+  `%c UPKEEP \n%c ${localize('common.version')} ${CARD_VERSION} `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray'
 );
@@ -26,9 +26,9 @@ interface WindowWithCustomCards extends Window {
   (window as unknown as WindowWithCustomCards).customCards || [];
 (window as unknown as WindowWithCustomCards).customCards.push({
   type: CARD_NAME,
-  name: 'Home Maintenance Card',
+  name: 'Upkeep Card',
   description:
-    'Visual task tracker for the Home Maintenance integration with progress rings, auto-discovery, and one-tap completion.',
+    'Visual task tracker for the Upkeep integration with progress rings, auto-discovery, and one-tap completion.',
   preview: true,
 });
 
@@ -36,7 +36,7 @@ interface WindowWithCustomCards extends Window {
 export class HomeMaintenanceCard extends LitElement {
   public static async getConfigElement(): Promise<LovelaceCardEditor> {
     await import('./editor');
-    return document.createElement('home-maintenance-card-editor') as LovelaceCardEditor;
+    return document.createElement('upkeep-card-editor') as LovelaceCardEditor;
   }
 
   public static getStubConfig(): Record<string, unknown> {
@@ -45,7 +45,8 @@ export class HomeMaintenanceCard extends LitElement {
 
   @property({ attribute: false }) public hass!: HomeAssistant;
   @state() private _config!: HomeMaintenanceCardConfig;
-  @state() private _activeFilter: string = DEFAULTS.filter;
+  @state() private _activeFilter: NonNullable<HomeMaintenanceCardConfig['filter']> =
+    DEFAULTS.filter;
 
   public setConfig(config: HomeMaintenanceCardConfig): void {
     if (!config) throw new Error(localize('common.invalid_configuration'));
@@ -99,7 +100,7 @@ export class HomeMaintenanceCard extends LitElement {
 
     const sortBy = this._config.sort_by ?? DEFAULTS.sort_by;
     tasks = sortTasks(tasks, sortBy);
-    tasks = filterTasks(tasks, this._activeFilter as any);
+    tasks = filterTasks(tasks, this._activeFilter);
 
     const allTasks: TaskData[] = entityIds
       .map((id) => this.hass.states[id])
@@ -139,7 +140,7 @@ export class HomeMaintenanceCard extends LitElement {
   }
 
   private _renderFilterBar(): TemplateResult {
-    const filters = ['all', 'overdue', 'due_soon', 'on_track'] as const;
+    const filters = ['all', 'overdue', 'due_soon', 'on_track', 'snoozed'] as const;
     return html`
       <div class="filter-bar">
         ${filters.map(

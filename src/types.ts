@@ -7,7 +7,7 @@ import {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'home-maintenance-card-editor': LovelaceCardEditor;
+    'upkeep-card-editor': LovelaceCardEditor;
     'hui-error-card': LovelaceCard;
   }
 }
@@ -20,7 +20,7 @@ export interface HomeMaintenanceCardConfig extends LovelaceCardConfig {
   view_mode?: 'grid' | 'list' | 'compact';
   progress_type?: 'ring' | 'bar';
   sort_by?: 'urgency' | 'name' | 'due_date';
-  filter?: 'all' | 'overdue' | 'due_soon' | 'on_track';
+  filter?: 'all' | 'overdue' | 'due_soon' | 'on_track' | 'snoozed';
   due_soon_days?: number;
   show_header?: boolean;
   show_filter_bar?: boolean;
@@ -40,5 +40,7 @@ export interface TaskData {
   interval_type: string;
   progress: number;
   days_remaining: number;
-  urgency: 'on_track' | 'due_soon' | 'overdue';
+  urgency: 'on_track' | 'due_soon' | 'overdue' | 'snoozed';
+  task_type?: 'time' | 'frequency';
+  assigned_user?: string;
 }

@@ -21,7 +21,7 @@ export class TaskTile extends LitElement {
       this._confirming = true;
       return;
     }
-    this.hass.callService('home_maintenance', 'reset_last_performed', {
+    this.hass.callService('upkeep', 'reset_last_performed', {
       entity_id: this.task.entity_id,
     });
     this._confirming = false;
@@ -36,8 +36,11 @@ export class TaskTile extends LitElement {
   }
 
   private _showMoreInfo(): void {
-    const event = new Event('hass-more-info', { bubbles: true, composed: true });
-    (event as any).detail = { entityId: this.task.entity_id };
+    const event = new CustomEvent<{ entityId: string }>('hass-more-info', {
+      bubbles: true,
+      composed: true,
+      detail: { entityId: this.task.entity_id },
+    });
     this.dispatchEvent(event);
   }
 
@@ -45,7 +48,7 @@ export class TaskTile extends LitElement {
     const { task } = this;
     const color = getUrgencyColor(task.urgency);
     const locale = this.hass?.locale?.language ?? this.hass?.language ?? 'en';
-    const daysText = formatDaysRemaining(task.days_remaining, locale);
+    const daysText = formatDaysRemaining(task.days_remaining, locale, task.task_type);
     const isOverdue = task.urgency === 'overdue';
 
     if (this.viewMode === 'list') return this._renderList(color, daysText, isOverdue);

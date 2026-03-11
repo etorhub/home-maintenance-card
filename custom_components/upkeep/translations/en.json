@@ -1,0 +1,30 @@
+{
+  "config": {
+    "flow_title": "Upkeep",
+    "step": {
+      "user": {
+        "title": "Configure Upkeep",
+        "description": "Set up the Upkeep integration.",
+        "data": {
+          "admin_only": "Restrict panel to admins only",
+          "sidebar_title": "The name shown in the sidebar for this integration.",
+          "sidebar_icon": "Sidebar icon (e.g. mdi:hammer-wrench)"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Only a single instance of Upkeep is allowed."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "admin_only": "Restrict panel to admins only",
+          "sidebar_title": "The name shown in the sidebar for this integration.",
+          "sidebar_icon": "Sidebar icon"
+        }
+      }
+    }
+  }
+}

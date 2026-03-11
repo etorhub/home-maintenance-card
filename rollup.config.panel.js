@@ -2,27 +2,18 @@ import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { minify } from 'rollup-plugin-esbuild-minify';
-import json from '@rollup/plugin-json';
 
 export default {
-  input: 'src/upkeep-card.ts',
-  output: [
-    {
-      file: 'dist/upkeep-card.js',
-      format: 'es',
-      inlineDynamicImports: true,
-    },
-    {
-      file: 'custom_components/upkeep/www/upkeep-card.js',
-      format: 'es',
-      inlineDynamicImports: true,
-    },
-  ],
+  input: 'panel-src/main.ts',
+  output: {
+    file: 'custom_components/upkeep/panel/dist/main.js',
+    format: 'es',
+    inlineDynamicImports: true,
+  },
   plugins: [
     nodeResolve(),
     commonjs(),
     typescript(),
-    json(),
     minify(),
   ],
   onwarn(warning, warn) {

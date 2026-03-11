@@ -1,6 +1,6 @@
-# Home Maintenance Card — Cursor Context
+# Upkeep — Cursor Context
 
-A custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the [Home Maintenance](https://github.com/TJPoorman/home_maintenance) integration. Displays recurring maintenance tasks with circular progress rings, color-coded urgency, and one-tap completion.
+A full [Home Assistant](https://www.home-assistant.io/) integration for recurring maintenance tasks. Includes a sidebar panel and Lovelace card. Replaces the unmaintained [TJPoorman/home_maintenance](https://github.com/TJPoorman/home_maintenance) integration.
 
 ## Tech Stack
 
@@ -19,7 +19,7 @@ A custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the 
 
 ```
 src/
-├── home-maintenance-card.ts   # Main card element
+├── upkeep-card.ts             # Main card element
 ├── editor.ts                  # Visual config editor (LovelaceCardEditor)
 ├── types.ts                   # HomeMaintenanceCardConfig, TaskData
 ├── const.ts                   # CARD_NAME, DEFAULTS, thresholds
@@ -59,11 +59,11 @@ src/
 
 ## HACS Plugin
 
-- Category: **Plugin** (Frontend), not Integration
-- Output: `dist/home-maintenance-card.js`
+- Category: **Integration** (HACS)
+- Output: `dist/upkeep-card.js`, `custom_components/upkeep/www/upkeep-card.js`
 - `hacs.json` defines name, filename, render_readme
 
 ## Local Testing in HA
 
 1. `npm start` → serves at `http://localhost:5000`
-2. Add Lovelace resource: URL `http://<dev-ip>:5000/home-maintenance-card.js`, type JavaScript Module
+2. Add Lovelace resource: URL `http://<dev-ip>:5000/upkeep-card.js`, type JavaScript Module

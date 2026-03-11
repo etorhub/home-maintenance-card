@@ -1,8 +1,8 @@
-# Home Maintenance Card
+# Upkeep
 
-A custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the [Home Maintenance](https://github.com/TJPoorman/home_maintenance) integration. Displays all your recurring maintenance tasks in a beautiful grid with circular progress rings, color-coded urgency, and one-tap task completion.
+A full [Home Assistant](https://www.home-assistant.io/) integration for recurring maintenance tasks, with a sidebar panel for management and a Lovelace card for dashboards. Replaces the unmaintained [TJPoorman/home_maintenance](https://github.com/TJPoorman/home_maintenance) integration.
 
-[![Open your Home Assistant instance and show the add repository dialog for this repository.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=etorhub&repository=home-maintenance-card&category=frontend)
+[![Open your Home Assistant instance and show the add repository dialog for this repository.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=etorhub&repository=home-maintenance-card&category=integration)
 
 ---
 
@@ -31,21 +31,23 @@ A custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the 
 
 ## Features
 
-- **Auto-discovery** — Automatically finds all Home Maintenance entities. No manual configuration required.
-- **Progress visualization** — Circular progress ring or horizontal bar showing how close each task is to its due date.
-- **Color-coded urgency** — Green (on track), yellow (due soon), red (overdue) with a pulsing glow for overdue tasks.
-- **One-tap completion** — Mark tasks as done directly from the card with a confirmation step.
-- **Multiple layouts** — Grid (default), list, or compact views.
-- **Sorting & filtering** — Sort by urgency, name, or due date. Filter by status.
-- **Summary header** — At-a-glance count of overdue, due soon, and on-track tasks.
-- **Visual config editor** — Configure everything through the HA UI, no YAML required.
-- **Localization** — English, Spanish, and Catalan.
+### Integration (Backend)
+- **Task management** — Create recurring tasks (every N days/weeks/months) or frequency-based tasks (after N usages).
+- **Sidebar panel** — Manage tasks from the sidebar: add, edit, complete, snooze.
+- **Binary sensors** — Each task creates a `binary_sensor` entity for automations and dashboards.
+- **NFC support** — Scan a tag to mark a task complete.
+- **Entity watching** — Auto-increment frequency tasks when a watched entity changes state.
+- **Events** — Fires `upkeep_task_due` when tasks become due; optional persistent notifications.
+- **Snooze** — Disable tasks temporarily or until a specific date.
 
----
-
-## Prerequisites
-
-This card requires the [Home Maintenance](https://github.com/TJPoorman/home_maintenance) integration to be installed and configured.
+### Lovelace Card
+- **Auto-discovery** — Automatically finds all Upkeep entities.
+- **Progress visualization** — Circular progress ring or horizontal bar.
+- **Color-coded urgency** — Green (on track), yellow (due soon), red (overdue), gray (snoozed).
+- **One-tap completion** — Mark tasks as done from the card.
+- **Multiple layouts** — Grid, list, or compact views.
+- **Sorting & filtering** — Sort by urgency, name, or due date. Filter by status including snoozed.
+- **Localization** — English, Spanish, Catalan, and more.
 
 ---
 
@@ -54,94 +56,51 @@ This card requires the [Home Maintenance](https://github.com/TJPoorman/home_main
 ### HACS (Recommended)
 
 1. Open **HACS** in your Home Assistant instance.
-2. Go to **Frontend** and click the **+** button.
-3. Search for **Home Maintenance Card**.
+2. Go to **Integrations** and click the **+** button.
+3. Search for **Upkeep**.
 4. Click **Download**.
-5. Refresh your browser (or clear cache).
+5. Restart Home Assistant.
+6. Go to **Settings → Devices & Services → Add Integration** and add **Upkeep**.
 
 ### Manual
 
-1. Download `home-maintenance-card.js` from the [latest release](https://github.com/etorhub/home-maintenance-card/releases/latest).
-2. Copy it to your `config/www/` folder.
-3. Add the resource in **Settings → Dashboards → Resources**:
-   - **URL:** `/local/home-maintenance-card.js`
-   - **Type:** JavaScript Module
+1. Copy the `custom_components/upkeep` folder to your `config/custom_components/` directory.
+2. Restart Home Assistant.
+3. Go to **Settings → Devices & Services → Add Integration** and add **Upkeep**.
 
-### Add Resource to Lovelace
-
-If the resource is not auto-loaded, add it manually:
-
-1. Go to **Settings → Dashboards → Resources**.
-2. Click **+ Add resource**.
-3. Set **URL** to `/local/home-maintenance-card.js` (manual) or `/hacsfiles/home-maintenance-card/home-maintenance-card.js` (HACS).
-4. Set **Resource type** to **JavaScript Module**.
-5. Click **Create**.
+The Lovelace card is auto-registered when the integration is configured. Add the card to your dashboard via **Add Card → Upkeep Card**.
 
 ---
 
-## Integration with Home Assistant & HACS
-
-### HACS Category: Plugin (Frontend)
-
-This is a **Plugin** (Frontend/Dashboard), not an Integration or Template:
-
-- **Plugin** — Lovelace custom cards (JavaScript UI). Add via HACS → Frontend.
-- **Integration** — Python custom components (backend entities, services).
-- **Template** — Jinja2 templates for `custom_templates/`.
-
-### HACS Plugin Structure
-
-This project follows the standard HACS Lovelace plugin layout:
+## Integration Structure
 
 ```
-home-maintenance-card/
-├── dist/
-│   └── home-maintenance-card.js    # Built bundle (in releases)
-├── hacs.json                        # HACS metadata
-├── src/
-│   ├── home-maintenance-card.ts    # Main card element
-│   ├── editor.ts                   # Visual config editor
-│   ├── types.ts
-│   ├── const.ts
-│   ├── utils.ts
-│   ├── styles.ts
-│   ├── components/
-│   └── localize/
+upkeep/
+├── custom_components/upkeep/             # Python integration
+│   ├── __init__.py
+│   ├── binary_sensor.py
+│   ├── config_flow.py
+│   ├── coordinator.py
+│   ├── entity_watch.py
+│   ├── frontend.py
+│   ├── panel/
+│   │   └── dist/main.js                 # Sidebar panel
+│   ├── store.py
+│   ├── websocket.py
+│   └── www/
+│       └── upkeep-card.js               # Lovelace card
+├── src/                                 # Card source
+├── panel-src/                           # Panel source
+├── hacs.json
 ├── package.json
 └── rollup.config.js
 ```
 
-### `hacs.json`
-
-```json
-{
-  "name": "Home Maintenance Card",
-  "render_readme": true,
-  "filename": "home-maintenance-card.js"
-}
-```
-
-- **name** — Display name in HACS.
-- **render_readme** — Show README in HACS UI.
-- **filename** — JS file to load (from `dist/` in releases).
-
 ### Release workflow
 
-Releases are created automatically on every push to `main` using [semantic-release](https://github.com/semantic-release/semantic-release). Use [Conventional Commits](https://www.conventionalcommits.org/) for release notes:
+Releases are created automatically on every push to `main` using [semantic-release](https://github.com/semantic-release/semantic-release). Use [Conventional Commits](https://www.conventionalcommits.org/) for release notes.
 
-- `feat:` → minor version bump (e.g. 1.1.0)
-- `fix:`, `docs:`, `chore:`, etc. → patch bump (e.g. 1.0.1)
-- `BREAKING CHANGE:` in footer → major bump (e.g. 2.0.0)
-
-### Adding to HACS Default Store
-
-To submit this card to the HACS default store:
-
-1. Fork [hacs/default](https://github.com/hacs/default).
-2. Add your repo to `plugins` in the appropriate file.
-3. Open a pull request.
-
-For custom repositories, users can add it via **HACS → Frontend → + → Custom repositories** with your GitHub URL.
+For custom repositories, add via **HACS → Integrations → + → Custom repositories** with your GitHub URL.
 
 ---
 
@@ -150,13 +109,13 @@ For custom repositories, users can add it via **HACS → Frontend → + → Cust
 ### Minimal (auto-discovers everything)
 
 ```yaml
-type: custom:home-maintenance-card
+type: custom:upkeep-card
 ```
 
 ### Full configuration
 
 ```yaml
-type: custom:home-maintenance-card
+type: custom:upkeep-card
 title: Manteniments
 view_mode: grid
 progress_type: ring
@@ -193,7 +152,7 @@ columns: 3
 ```bash
 # Clone the repository
 git clone https://github.com/etorhub/home-maintenance-card.git
-cd home-maintenance-card
+cd home-maintenance-card  # or upkeep if repo is renamed
 
 # Install dependencies
 npm install
@@ -234,7 +193,7 @@ Stories cover all view modes (grid, list, compact), progress types (ring, bar), 
 
 1. Run `npm start` to serve the dev build at `http://localhost:5000`.
 2. Add a Lovelace resource:
-   - **URL:** `http://<your-dev-machine-ip>:5000/home-maintenance-card.js`
+   - **URL:** `http://<your-dev-machine-ip>:5000/upkeep-card.js`
    - **Type:** JavaScript Module
 3. Ensure your dev machine is reachable from the Home Assistant host (same network or port forwarding).
 
@@ -246,7 +205,7 @@ Stories cover all view modes (grid, list, compact), progress types (ring, bar), 
 
 **Commit format:** All commits must use [Conventional Commits](https://www.conventionalcommits.org/) (e.g. `feat:`, `fix:`, `docs:`). Use `npm run commit` for an interactive wizard.
 
-**Note:** The pre-commit hook runs `npm run build` and stages `dist/home-maintenance-card.js`, so the built file is included in every commit automatically.
+**Note:** The pre-commit hook runs `npm run build` and stages the built files, so they are included in every commit automatically.
 
 ```bash
 npx lefthook install   # Install hooks

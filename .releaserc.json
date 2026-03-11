@@ -50,7 +50,7 @@
       "@semantic-release/github",
       {
         "assets": [
-          { "path": "dist/home-maintenance-card.js", "label": "HACS distribution" }
+          { "path": "dist/upkeep-card.js", "label": "HACS distribution" }
         ]
       }
     ]

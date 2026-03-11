@@ -6,7 +6,7 @@ import { CARD_EDITOR_NAME, DEFAULTS } from './const';
 import { localize } from './localize/localize';
 
 @customElement(CARD_EDITOR_NAME)
-export class HomeMaintenanceCardEditor extends LitElement implements LovelaceCardEditor {
+export class UpkeepCardEditor extends LitElement implements LovelaceCardEditor {
   @property({ attribute: false }) public hass!: HomeAssistant;
   @state() private _config?: HomeMaintenanceCardConfig;
   @state() private _openSection = 'general';
