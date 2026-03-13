@@ -1,0 +1,88 @@
+reset_last_performed:
+  name: Reset Last Performed
+  description: >
+    Resets the 'last_performed' date for a maintenance task entity.
+    Alias for complete_task for backward compatibility.
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The ID of the task entity to reset.
+      required: true
+      selector:
+        entity:
+          domain: binary_sensor
+    performed_date:
+      name: Performed Date
+      description: Optionally specify the date the task was last performed.
+      required: false
+      example: "2025-06-01"
+      selector:
+        date:
+
+complete_task:
+  name: Complete Task
+  description: Mark a maintenance task as completed (resets last performed date).
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The ID of the task entity to complete.
+      required: true
+      selector:
+        entity:
+          domain: binary_sensor
+    performed_date:
+      name: Performed Date
+      description: Optionally specify the date the task was last performed.
+      required: false
+      example: "2025-06-01"
+      selector:
+        date:
+
+snooze_task:
+  name: Snooze Task
+  description: Snooze or disable a maintenance task.
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The ID of the task entity to snooze.
+      required: true
+      selector:
+        entity:
+          domain: binary_sensor
+    snooze_until:
+      name: Snooze Until
+      description: Date when the task should auto-re-enable (YYYY-MM-DD). Omit to disable indefinitely.
+      required: false
+      selector:
+        date:
+    disable:
+      name: Disable
+      description: If true, disable the task without a snooze date.
+      required: false
+      default: false
+      selector:
+        boolean:
+
+enable_task:
+  name: Enable Task
+  description: Re-enable a snoozed or disabled maintenance task.
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The ID of the task entity to enable.
+      required: true
+      selector:
+        entity:
+          domain: binary_sensor
+
+increment_counter:
+  name: Increment Counter
+  description: Increment the usage counter for a frequency-based task (e.g. dishwasher runs).
+  fields:
+    entity_id:
+      name: Entity ID
+      description: The ID of the frequency task entity to increment.
+      required: true
+      selector:
+        entity:
+          domain: binary_sensor

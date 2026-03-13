@@ -1,8 +1,8 @@
 {
-  "name": "home-maintenance-card",
+  "name": "upkeep",
   "type": "module",
   "version": "1.0.0",
-  "description": "A custom Lovelace card for the Home Maintenance integration — visual progress tracking, auto-discovery, and one-tap task completion.",
+  "description": "A Home Assistant integration for recurring maintenance tasks — sidebar panel, Lovelace card, visual progress tracking, and one-tap completion.",
   "keywords": [
     "home-assistant",
     "homeassistant",
@@ -12,7 +12,7 @@
     "hacs",
     "maintenance"
   ],
-  "module": "home-maintenance-card.js",
+  "module": "upkeep-card.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/etorhub/home-maintenance-card"
@@ -78,7 +78,9 @@
   "scripts": {
     "commit": "cz",
     "start": "rollup -c rollup.config.dev.js --watch",
-    "build": "npm run clean && rollup -c",
+    "build": "npm run clean && npm run build:card && npm run build:panel",
+    "build:card": "rollup -c rollup.config.js",
+    "build:panel": "rollup -c rollup.config.panel.js",
     "clean": "rm -rf dist",
     "lint": "eslint src tests .storybook",
     "lint:fix": "eslint src tests .storybook --fix",

@@ -161,6 +161,11 @@ describe('filterTasks', () => {
     expect(filterTasks(tasks, 'due_soon')).toHaveLength(1);
     expect(filterTasks(tasks, 'on_track')).toHaveLength(1);
   });
+
+  it('filters snoozed', () => {
+    const withSnoozed = [...tasks, { urgency: 'snoozed' } as any];
+    expect(filterTasks(withSnoozed, 'snoozed')).toHaveLength(1);
+  });
 });
 
 describe('getUrgencyColor', () => {
@@ -168,6 +173,7 @@ describe('getUrgencyColor', () => {
     expect(getUrgencyColor('overdue')).toContain('error');
     expect(getUrgencyColor('due_soon')).toContain('warning');
     expect(getUrgencyColor('on_track')).toContain('success');
+    expect(getUrgencyColor('snoozed')).toBeDefined();
   });
 });
 
@@ -192,5 +198,11 @@ describe('formatDaysRemaining', () => {
 
   it('formats in Catalan', () => {
     expect(formatDaysRemaining(1, 'ca')).toContain('1');
+  });
+
+  it('formats frequency uses left', () => {
+    expect(formatDaysRemaining(5, 'en', 'frequency')).toContain('5');
+    expect(formatDaysRemaining(5, 'en', 'frequency')).toContain('uses');
+    expect(formatDaysRemaining(0, 'en', 'frequency')).toBe('Today');
   });
 });

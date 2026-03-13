@@ -1,8 +1,8 @@
-# Home Maintenance Card — Project Context
+# Upkeep — Project Context
 
 ## Overview
 
-Custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the [Home Maintenance](https://github.com/TJPoorman/home_maintenance) integration. Shows recurring maintenance tasks with progress visualization, urgency colors, and one-tap completion.
+Full [Home Assistant](https://www.home-assistant.io/) integration for recurring maintenance tasks. Includes a sidebar panel for management and a Lovelace card for dashboards. Replaces the unmaintained [TJPoorman/home_maintenance](https://github.com/TJPoorman/home_maintenance) integration.
 
 ## Tech Stack
 
@@ -19,7 +19,7 @@ Custom [Home Assistant](https://www.home-assistant.io/) Lovelace card for the [H
 
 ```
 src/
-├── home-maintenance-card.ts   # Main card (LitElement)
+├── upkeep-card.ts             # Main card (LitElement)
 ├── editor.ts                  # Visual config editor (LovelaceCardEditor)
 ├── types.ts                   # HomeMaintenanceCardConfig, TaskData
 ├── const.ts                   # CARD_NAME, DEFAULTS, PROGRESS_THRESHOLDS
@@ -35,7 +35,7 @@ src/
 
 ## Key Patterns
 
-1. **Entity discovery:** `discoverEntities(hass, entities?, exclude_entities?)` — auto-finds `binary_sensor.*` with Home Maintenance attributes, or uses manual list
+1. **Entity discovery:** `discoverEntities(hass, entities?, exclude_entities?)` — auto-finds `binary_sensor.*` with Upkeep attributes, or uses manual list
 2. **Task data:** `buildTaskData(stateObj, dueSoonDays)` — computes progress, days_remaining, urgency
 3. **Urgency:** `on_track` | `due_soon` | `overdue` — based on progress and `due_soon_days`
 4. **Localization:** All UI strings via `localize('editor.title')`, etc.
@@ -72,7 +72,7 @@ npm run storybook      # Storybook on :6006
 ## HACS
 
 - **Category:** Plugin (Frontend)
-- **Output:** `dist/home-maintenance-card.js`
+- **Output:** `dist/upkeep-card.js`
 - **hacs.json:** name, filename, render_readme
 
 ## Contributing

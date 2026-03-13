@@ -5,9 +5,9 @@ import json from '@rollup/plugin-json';
 import serve from 'rollup-plugin-serve';
 
 export default {
-  input: 'src/home-maintenance-card.ts',
+  input: 'src/upkeep-card.ts',
   output: {
-    file: 'dist/home-maintenance-card.js',
+    file: 'dist/upkeep-card.js',
     format: 'es',
     inlineDynamicImports: true,
   },

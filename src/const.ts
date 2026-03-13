@@ -1,9 +1,9 @@
 export const CARD_VERSION = '1.0.0';
-export const CARD_NAME = 'home-maintenance-card';
-export const CARD_EDITOR_NAME = 'home-maintenance-card-editor';
+export const CARD_NAME = 'upkeep-card';
+export const CARD_EDITOR_NAME = 'upkeep-card-editor';
 
 export const DEFAULTS = {
-  title: 'Home Maintenance',
+  title: 'Upkeep',
   view_mode: 'grid' as const,
   progress_type: 'ring' as const,
   sort_by: 'urgency' as const,
@@ -30,3 +30,6 @@ export const HOME_MAINTENANCE_ATTRIBUTES = [
   'interval_value',
   'interval_type',
 ];
+
+/** Attributes that indicate a maintenance entity (time or frequency based) */
+export const HOME_MAINTENANCE_ATTRIBUTES_ALT = ['progress', 'task_type'];

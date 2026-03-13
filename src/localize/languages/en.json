@@ -4,7 +4,7 @@
     "invalid_configuration": "Invalid configuration"
   },
   "card": {
-    "title": "Home Maintenance",
+    "title": "Upkeep",
     "overdue": "Overdue",
     "due_soon": "Due soon",
     "on_track": "On track",
@@ -41,6 +41,7 @@
     "name": "Name",
     "due_date": "Due date",
     "all": "All",
+    "snoozed": "Snoozed",
     "auto_discover": "Auto-discover entities"
   }
 }

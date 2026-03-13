@@ -2,15 +2,15 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import type { HomeMaintenanceCardConfig } from './types';
 import type { HomeAssistant } from 'custom-card-helpers';
 
-import './home-maintenance-card';
+import './upkeep-card';
 
 import { mockHass, mockHassOverdue, mockHassEmpty } from '../.storybook/mock-hass';
 
-const CARD_TYPE = 'custom:home-maintenance-card';
+const CARD_TYPE = 'custom:upkeep-card';
 
 const defaultConfig: HomeMaintenanceCardConfig = {
   type: CARD_TYPE,
-  title: 'Home Maintenance',
+  title: 'Upkeep',
   view_mode: 'grid',
   progress_type: 'ring',
   sort_by: 'urgency',
@@ -24,7 +24,7 @@ const defaultConfig: HomeMaintenanceCardConfig = {
 function renderCard(args: { hass: HomeAssistant | null; config: HomeMaintenanceCardConfig }) {
   const wrapper = document.createElement('div');
   wrapper.style.maxWidth = '500px';
-  const card = document.createElement('home-maintenance-card') as HTMLElement & {
+  const card = document.createElement('upkeep-card') as HTMLElement & {
     hass: HomeAssistant | null;
     setConfig: (config: HomeMaintenanceCardConfig) => void;
   };
@@ -35,7 +35,7 @@ function renderCard(args: { hass: HomeAssistant | null; config: HomeMaintenanceC
 }
 
 const meta: Meta = {
-  title: 'Cards/Home Maintenance',
+  title: 'Cards/Upkeep',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
